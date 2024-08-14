@@ -39,23 +39,68 @@ namespace BananaOS.Pages
         public static bool Platform6Enable;
         public static bool Platform5Disable;
         public static bool Platform6Disable;
+        public static GameObject StickPlat;
+        public static GameObject StickPlat1;
+        public static GameObject Platform7;
+        public static bool Platform7Enable;
+        public static GameObject Platform8;
+        public static bool Platform8Enable;
+        public static bool Platform7Disable;
+        public static bool Platform8Disable;
         public bool Platforms { get; private set; }
         public bool Platforms1 { get; private set; }
         public bool Platforms2 { get; private set; }
+        public bool Platforms3 { get; private set; }
 
         //What you return is what is drawn to the watch screen the screen will be updated everytime you press a button
         public override string OnGetScreenContent()
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("<color=green>==</color> <color=red> Platforms 0.0.2 </color> <color=green>==</color>");
-            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(0, "Enable Platforms"));
-            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(1, "Disable Platforms"));
-            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(2, "Enable Plank Plats"));
-            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(3, "Disable Plank Plats"));
-            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(4, ""));
-            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(5, "By FireGiraffe"));
+            stringBuilder.AppendLine("<color=green>==</color><color=red> Platforms V0.2.0</color><color=green>==</color>");
+            if (PhotonNetwork.InRoom && Moddedcheck.modcheck.IsModded())
+            {
+                if (Platforms)
+                {
+                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(0, "Platforms Enabled"));
+                }
+                else
+                {
+                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(0, "Platforms Disabled"));
+                }
+                if (Platforms1)
+                {
+                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(1, "Plank Platforms Enabled"));
+                }
+                else
+                {
+                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(1, "Plank Platforms Disabled"));
+                }
+                if (Platforms2)
+                {
+                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(2, "Sticky Platforms Enabled"));
+                }
+                else
+                {
+                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(2, "Sticky Platforms Disabled"));
+                }
+                if (Platforms3)
+                {
+                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(3, "No-Rotate Platforms Enabled"));
+                }
+                else
+                {
+                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(3, "No-Rotate Platforms Disabled"));
+                }
+                stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(4, "<color=yellow>Made by FireGiraffe</color>"));
+                stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(5, "<color=yellow>Help from Striker</color>"));
+            }
+            else
+            {
+                stringBuilder.AppendLine("You're not in a Modded Lobby");
+            }
             return stringBuilder.ToString();
         }
+
 
         public void Update()
         {
@@ -171,6 +216,121 @@ namespace BananaOS.Pages
                         return;
                     }
                 }
+                if (Platforms2 == true)
+                {
+                    if (ControllerInputPoller.instance.rightGrab)
+                    {
+                        if (!Platform5Enable)
+                        {
+                            Platform5 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            Platform5.transform.position = GorillaLocomotion.Player.Instance.rightControllerTransform.position + new Vector3(0f, -0.02f, 0f);
+                            Platform5.transform.rotation = GorillaLocomotion.Player.Instance.rightControllerTransform.rotation * Quaternion.Euler(0f, 0f, -90f);
+                            Platform5Enable = true;
+                            Platform5.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
+                            Platform5.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
+                            StickPlat1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            StickPlat1.transform.position = GorillaLocomotion.Player.Instance.rightControllerTransform.position + new Vector3(0f, -0.02f, 0f);
+                            StickPlat1.transform.localScale = new Vector3(0.28f, 0.28f, 0.28f);
+                        }
+                    }
+                    else
+                    {
+                        if (Platform5Enable)
+                        {
+                            UnityEngine.Object.Destroy(Platform5);
+                            Platform5Enable = false;
+                            return;
+                        }
+                    }
+                    if (ControllerInputPoller.instance.leftGrab)
+                    {
+                        if (!Platform6Enable)
+                        {
+                            Platform6 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            Platform6.transform.position = GorillaLocomotion.Player.Instance.leftControllerTransform.position + new Vector3(0f, -0.02f, 0f);
+                            Platform6.transform.rotation = GorillaLocomotion.Player.Instance.leftControllerTransform.rotation * Quaternion.Euler(0f, 0f, -90f);
+                            Platform6Enable = true;
+                            Platform6.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
+                            Platform6.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
+                            StickPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            StickPlat.transform.position = GorillaLocomotion.Player.Instance.leftControllerTransform.position + new Vector3(0f, -0.02f, 0f);
+                            StickPlat.transform.localScale = new Vector3(0.28f, 0.28f, 0.28f);
+                        }
+                    }
+                    else
+                    {
+                        if (Platform2Enable)
+                        {
+                            UnityEngine.Object.Destroy(Platform2);
+                            Platform2Enable = false;
+                            return;
+                        }
+                    }
+                    if (PhotonNetwork.InRoom && !Moddedcheck.modcheck.IsModded())
+                    {
+                        UnityEngine.Object.Destroy(Platform1);
+                        Platform1Enable = false;
+                        Platform1Disable = true;
+                        UnityEngine.Object.Destroy(Platform2);
+                        Platform2Enable = false;
+                        Platform2Disable = true;
+                        return;
+                    }
+                }
+                if (Platforms3 == true)
+                {
+                    if (ControllerInputPoller.instance.rightGrab)
+                    {
+                        if (!Platform7Enable)
+                        {
+                            Platform7 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            Platform7.transform.position = GorillaLocomotion.Player.Instance.rightControllerTransform.position + new Vector3(0f, -0.02f, 0f);
+                            Platform7Enable = true;
+                            Platform7.transform.localScale = new Vector3(0.35f, 0.015f, 0.35f);
+                            Platform7.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
+                        }
+                    }
+                    else
+                    {
+                        if (Platform7Enable)
+                        {
+                            UnityEngine.Object.Destroy(Platform7);
+                            Platform7Enable = false;
+                            return;
+                        }
+                    }
+                    if (ControllerInputPoller.instance.leftGrab)
+                    {
+                        if (!Platform8Enable)
+                        {
+                            Platform8 = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            Platform8.transform.position = GorillaLocomotion.Player.Instance.leftControllerTransform.position + new Vector3(0f, -0.02f, 0f);
+                            Platform8.transform.rotation = GorillaLocomotion.Player.Instance.leftControllerTransform.rotation * Quaternion.Euler(0f, 0f, -90f);
+                            Platform8Enable = true;
+                            Platform8.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
+                            Platform8.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
+                        }
+                    }
+                    else
+                    {
+                        if (Platform8Enable)
+                        {
+                            UnityEngine.Object.Destroy(Platform8);
+                            Platform8Enable = false;
+                            return;
+                        }
+                    }
+                    if (PhotonNetwork.InRoom && !Moddedcheck.modcheck.IsModded())
+                    {
+                        UnityEngine.Object.Destroy(Platform7);
+                        Platform7Enable = false;
+                        Platform7Disable = true;
+                        UnityEngine.Object.Destroy(Platform8);
+                        Platform8Enable = false;
+                        Platform8Disable = true;
+                        return;
+                    }
+                }
             } 
         }
 
@@ -191,19 +351,47 @@ namespace BananaOS.Pages
                     {
                         if (selectionHandler.currentIndex == 0)
                         {
-                            Platforms = true;
+                            if (!Platforms)
+                            {
+                                Platforms = true;
+                            }
+                            else
+                            {
+                                Platforms = false;
+                            }
                         }
                         if (selectionHandler.currentIndex == 1)
                         {
-                            Platforms = false;
+                            if (!Platforms1)
+                            {
+                                Platforms1 = true;
+                            }
+                            else
+                            {
+                                Platforms1 = false;
+                            }
                         }
                         if (selectionHandler.currentIndex == 2)
                         {
-                            Platforms1 = true;
+                            if (!Platforms2)
+                            {
+                                Platforms2 = true;
+                            }
+                            else
+                            {
+                                Platforms2 = false;
+                            }
                         }
                         if (selectionHandler.currentIndex == 3)
                         {
-                            Platforms1 = false;
+                            if (!Platforms3)
+                            {
+                                Platforms3 = true;
+                            }
+                            else
+                            {
+                                Platforms3 = false;
+                            }
                         }
                     }
                     return;
