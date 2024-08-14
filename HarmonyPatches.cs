@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 
-namespace Super_Monk
+namespace Platforms
 {
     /// <summary>
     /// This class handles applying harmony patches to the game.

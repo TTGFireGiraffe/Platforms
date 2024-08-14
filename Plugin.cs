@@ -1,9 +1,11 @@
-﻿using BepInEx;
+﻿using BananaOS;
+using BananaOS.Pages;
+using BepInEx;
 using System;
 using UnityEngine;
 using Utilla;
 
-namespace Super_Monk
+namespace Platforms
 {
     /// <summary>
     /// This is your mod's main class.
@@ -21,7 +23,7 @@ namespace Super_Monk
         {
             /* A lot of Gorilla Tag systems will not be set up when start is called /*
 			/* Put code in OnGameInitialized to avoid null references */
-
+            MonkeWatch.RegisterPage(typeof(PlatformsPage));
             Utilla.Events.GameInitialized += OnGameInitialized;
         }
 
