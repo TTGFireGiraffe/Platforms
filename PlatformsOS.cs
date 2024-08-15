@@ -18,7 +18,7 @@ namespace BananaOS.Pages
         public override void OnPostModSetup()
         {
             //max selection index so the indicator stays on the screen
-            selectionHandler.maxIndex = 3;
+            selectionHandler.maxIndex = 7;
         }
 
         public static GameObject Platform1;
@@ -47,57 +47,42 @@ namespace BananaOS.Pages
         public static bool Platform8Enable;
         public static bool Platform7Disable;
         public static bool Platform8Disable;
+        public static bool StickyPlatEnable;
+        public static bool StickyPlatDisable;
+        public static bool StickyPlatEnable1;
+        public static bool StickyPlatDisable1;
+        public static GameObject Platform9;
+        public static bool Platform9Enable;
+        public static GameObject Platform10;
+        public static bool Platform10Enable;
+        public static bool Platform9Disable;
+        public static bool Platform10Disable;
+
         public bool Platforms { get; private set; }
         public bool Platforms1 { get; private set; }
         public bool Platforms2 { get; private set; }
         public bool Platforms3 { get; private set; }
+        public bool Platforms4 { get; private set; }
+
+        public bool Platforms5 { get; private set; }
 
         //What you return is what is drawn to the watch screen the screen will be updated everytime you press a button
         public override string OnGetScreenContent()
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("<color=green>==</color><color=red> Platforms V0.2.0</color><color=green>==</color>");
-            if (PhotonNetwork.InRoom && Moddedcheck.modcheck.IsModded())
-            {
-                if (Platforms)
-                {
-                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(0, "Platforms Enabled"));
-                }
-                else
-                {
-                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(0, "Platforms Disabled"));
-                }
-                if (Platforms1)
-                {
-                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(1, "Plank Platforms Enabled"));
-                }
-                else
-                {
-                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(1, "Plank Platforms Disabled"));
-                }
-                if (Platforms2)
-                {
-                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(2, "Sticky Platforms Enabled"));
-                }
-                else
-                {
-                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(2, "Sticky Platforms Disabled"));
-                }
-                if (Platforms3)
-                {
-                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(3, "No-Rotate Platforms Enabled"));
-                }
-                else
-                {
-                    stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(3, "No-Rotate Platforms Disabled"));
-                }
-                stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(4, "<color=yellow>Made by FireGiraffe</color>"));
-                stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(5, "<color=yellow>Help from Striker</color>"));
-            }
-            else
-            {
-                stringBuilder.AppendLine("You're not in a Modded Lobby");
-            }
+            stringBuilder.AppendLine("<color=green>==</color><color=red> Platforms V0.2.1 </color><color=green>==</color>");
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(0, "Enable Platforms"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(1, "Disable Platforms"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(2, "Enable Plank Platforms"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(3, "Disable Plank Platforms"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(4, "Enable No-Rotate Platforms"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(5, "Disable No-Rotate Platforms"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(6, "Sticky Platforms Soon"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(7, "Sticky Platforms Soon"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(11, "<color=yellow>Made by FireGiraffe</color>"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(12, "<color=yellow>Help from Striker</color>"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(13, "<color=yellow>Ideas from BoominLOL</color>"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(14, "<color=yellow>Tested By window</color>"));
             return stringBuilder.ToString();
         }
 
@@ -228,9 +213,6 @@ namespace BananaOS.Pages
                             Platform5Enable = true;
                             Platform5.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
                             Platform5.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
-                            StickPlat1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                            StickPlat1.transform.position = GorillaLocomotion.Player.Instance.rightControllerTransform.position + new Vector3(0f, -0.02f, 0f);
-                            StickPlat1.transform.localScale = new Vector3(0.28f, 0.28f, 0.28f);
                         }
                     }
                     else
@@ -252,17 +234,14 @@ namespace BananaOS.Pages
                             Platform6Enable = true;
                             Platform6.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
                             Platform6.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
-                            StickPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                            StickPlat.transform.position = GorillaLocomotion.Player.Instance.leftControllerTransform.position + new Vector3(0f, -0.02f, 0f);
-                            StickPlat.transform.localScale = new Vector3(0.28f, 0.28f, 0.28f);
                         }
                     }
                     else
                     {
-                        if (Platform2Enable)
+                        if (Platform6Enable)
                         {
-                            UnityEngine.Object.Destroy(Platform2);
-                            Platform2Enable = false;
+                            UnityEngine.Object.Destroy(Platform6);
+                            Platform6Enable = false;
                             return;
                         }
                     }
@@ -284,9 +263,9 @@ namespace BananaOS.Pages
                         if (!Platform7Enable)
                         {
                             Platform7 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                            Platform7.transform.position = GorillaLocomotion.Player.Instance.rightControllerTransform.position + new Vector3(0f, -0.02f, 0f);
+                            Platform7.transform.position = GorillaLocomotion.Player.Instance.rightControllerTransform.position + new Vector3(0f, -0.062f, 0f);
                             Platform7Enable = true;
-                            Platform7.transform.localScale = new Vector3(0.35f, 0.015f, 0.35f);
+                            Platform7.transform.localScale = new Vector3(0.35f, 0.02f, 0.35f);
                             Platform7.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
                         }
                     }
@@ -304,11 +283,10 @@ namespace BananaOS.Pages
                         if (!Platform8Enable)
                         {
                             Platform8 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                            Platform8.transform.position = GorillaLocomotion.Player.Instance.leftControllerTransform.position + new Vector3(0f, -0.02f, 0f);
-                            Platform8.transform.rotation = GorillaLocomotion.Player.Instance.leftControllerTransform.rotation * Quaternion.Euler(0f, 0f, -90f);
+                            Platform8.transform.position = GorillaLocomotion.Player.Instance.leftControllerTransform.position + new Vector3(0f, -0.062f, 0f);
                             Platform8Enable = true;
                             Platform8.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
-                            Platform8.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
+                            Platform8.transform.localScale = new Vector3(0.38f, 0.02f, 0.38f);
                         }
                     }
                     else
@@ -351,47 +329,27 @@ namespace BananaOS.Pages
                     {
                         if (selectionHandler.currentIndex == 0)
                         {
-                            if (!Platforms)
-                            {
-                                Platforms = true;
-                            }
-                            else
-                            {
-                                Platforms = false;
-                            }
+                            Platforms = true;
                         }
                         if (selectionHandler.currentIndex == 1)
                         {
-                            if (!Platforms1)
-                            {
-                                Platforms1 = true;
-                            }
-                            else
-                            {
-                                Platforms1 = false;
-                            }
+                            Platforms = false;
                         }
                         if (selectionHandler.currentIndex == 2)
                         {
-                            if (!Platforms2)
-                            {
-                                Platforms2 = true;
-                            }
-                            else
-                            {
-                                Platforms2 = false;
-                            }
+                            Platforms1 = true;
                         }
                         if (selectionHandler.currentIndex == 3)
                         {
-                            if (!Platforms3)
-                            {
-                                Platforms3 = true;
-                            }
-                            else
-                            {
-                                Platforms3 = false;
-                            }
+                            Platforms1 = false;
+                        }
+                        if (selectionHandler.currentIndex == 4)
+                        {
+                            Platforms3 = true;
+                        }
+                        if (selectionHandler.currentIndex == 5)
+                        {
+                            Platforms3 = false;
                         }
                     }
                     return;
