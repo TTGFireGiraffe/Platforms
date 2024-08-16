@@ -57,6 +57,8 @@ namespace BananaOS.Pages
         public static bool Platform10Enable;
         public static bool Platform9Disable;
         public static bool Platform10Disable;
+        private static float transitionDuration = 3f;
+        private static float elapsedTime = 0f;
 
         public bool Platforms { get; private set; }
         public bool Platforms1 { get; private set; }
@@ -70,7 +72,7 @@ namespace BananaOS.Pages
         public override string OnGetScreenContent()
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("<color=green>==</color><color=red> Platforms V0.2.1 </color><color=green>==</color>");
+            stringBuilder.AppendLine("<color=green>==</color><color=red> Platforms V0.3.0 </color><color=green>==</color>");
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(0, "Enable Platforms"));
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(1, "Disable Platforms"));
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(2, "Enable Plank Platforms"));
@@ -100,9 +102,19 @@ namespace BananaOS.Pages
                             Platform1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
                             Platform1.transform.position = GorillaLocomotion.Player.Instance.rightControllerTransform.position + new Vector3(0f, -0.02f, 0f);
                             Platform1.transform.rotation = GorillaLocomotion.Player.Instance.rightControllerTransform.rotation * Quaternion.Euler(0f, 0f, -90f);
+                            Platform1.GetComponent<Renderer>().material.color = Color.black;
                             Platform1Enable = true;
                             Platform1.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
                             Platform1.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
+                        }
+                        if (elapsedTime < transitionDuration)
+                        {
+                            Platform1.GetComponent<Renderer>().material.color = Color.black;
+                            elapsedTime += Time.deltaTime;
+                            if (elapsedTime >= transitionDuration)
+                            {
+                                elapsedTime = 0f;
+                            }
                         }
                     }
                     else
@@ -124,6 +136,16 @@ namespace BananaOS.Pages
                             Platform2Enable = true;
                             Platform2.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
                             Platform2.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
+                            Platform2.GetComponent<Renderer>().material.color = Color.black;
+                        }
+                        if (elapsedTime < transitionDuration)
+                        {
+                            Platform2.GetComponent<Renderer>().material.color = Color.black;
+                            elapsedTime += Time.deltaTime;
+                            if (elapsedTime >= transitionDuration)
+                            {
+                                elapsedTime = 0f;
+                            }
                         }
                     }
                     else
@@ -158,6 +180,16 @@ namespace BananaOS.Pages
                             Platform3Enable = true;
                             Platform3.transform.localScale = new Vector3(0.28f, 0.015f, 0.53f);
                             Platform3.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
+                            Platform3.GetComponent<Renderer>().material.color = Color.black;
+                        }
+                        if (elapsedTime < transitionDuration)
+                        {
+                            Platform3.GetComponent<Renderer>().material.color = Color.black;
+                            elapsedTime += Time.deltaTime;
+                            if (elapsedTime >= transitionDuration)
+                            {
+                                elapsedTime = 0f;
+                            }
                         }
                     }
                     else
@@ -179,6 +211,15 @@ namespace BananaOS.Pages
                             Platform4Enable = true;
                             Platform4.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
                             Platform4.transform.localScale = new Vector3(0.28f, 0.015f, 0.53f);
+                        }
+                        if (elapsedTime < transitionDuration)
+                        {
+                            Platform4.GetComponent<Renderer>().material.color = Color.black;
+                            elapsedTime += Time.deltaTime;
+                            if (elapsedTime >= transitionDuration)
+                            {
+                                elapsedTime = 0f;
+                            }
                         }
                     }
                     else
@@ -213,6 +254,16 @@ namespace BananaOS.Pages
                             Platform5Enable = true;
                             Platform5.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
                             Platform5.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
+                            Platform5.GetComponent<Renderer>().material.color = Color.black;
+                        }
+                        if (elapsedTime < transitionDuration)
+                        {
+                            Platform5.GetComponent<Renderer>().material.color = Color.black;
+                            elapsedTime += Time.deltaTime;
+                            if (elapsedTime >= transitionDuration)
+                            {
+                                elapsedTime = 0f;
+                            }
                         }
                     }
                     else
@@ -234,6 +285,16 @@ namespace BananaOS.Pages
                             Platform6Enable = true;
                             Platform6.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
                             Platform6.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
+                            Platform6.GetComponent<Renderer>().material.color = Color.black;
+                        }
+                        if (elapsedTime < transitionDuration)
+                        {
+                            Platform6.GetComponent<Renderer>().material.color = Color.black;
+                            elapsedTime += Time.deltaTime;
+                            if (elapsedTime >= transitionDuration)
+                            {
+                                elapsedTime = 0f;
+                            }
                         }
                     }
                     else
@@ -267,6 +328,16 @@ namespace BananaOS.Pages
                             Platform7Enable = true;
                             Platform7.transform.localScale = new Vector3(0.35f, 0.02f, 0.35f);
                             Platform7.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
+                            Platform7.GetComponent<Renderer>().material.color = Color.black;
+                        }
+                        if (elapsedTime < transitionDuration)
+                        {
+                            Platform7.GetComponent<Renderer>().material.color = Color.black;
+                            elapsedTime += Time.deltaTime;
+                            if (elapsedTime >= transitionDuration)
+                            {
+                                elapsedTime = 0f;
+                            }
                         }
                     }
                     else
@@ -287,6 +358,16 @@ namespace BananaOS.Pages
                             Platform8Enable = true;
                             Platform8.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
                             Platform8.transform.localScale = new Vector3(0.38f, 0.02f, 0.38f);
+                            Platform8.GetComponent<Renderer>().material.color = Color.black;
+                        }
+                        if (elapsedTime < transitionDuration)
+                        {
+                            Platform8.GetComponent<Renderer>().material.color = Color.black;
+                            elapsedTime += Time.deltaTime;
+                            if (elapsedTime >= transitionDuration)
+                            {
+                                elapsedTime = 0f;
+                            }
                         }
                     }
                     else
