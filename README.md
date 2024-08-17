@@ -12,5 +12,8 @@ Added No-Rotate Platforms
 Added Credits to people!
 # V0.2.1
 Fixed the mod for newest BananaOS Version!
-# 0.3.0
+# V0.3.0
 The Platforms don't blind you anymore
+Added RGB Platforms!
+# 0.3.1 or something
+coming soon idrk
