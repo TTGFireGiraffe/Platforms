@@ -79,15 +79,17 @@ namespace BananaOS.Pages
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(3, "Disable Plank Platforms"));
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(4, "Enable No-Rotate Platforms"));
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(5, "Disable No-Rotate Platforms"));
-            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(6, "Sticky Platforms Soon"));
-            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(7, "Sticky Platforms Soon"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(6, "Enable RGB Platforms"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(7, "Disable RGB Platforms"));
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(11, "<color=yellow>Made by FireGiraffe</color>"));
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(12, "<color=yellow>Help from Striker</color>"));
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(13, "<color=yellow>Ideas from BoominLOL</color>"));
             stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(14, "<color=yellow>Tested By window</color>"));
+            stringBuilder.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(15, "<color=yellow>Tested By Dragon8</color>"));
             return stringBuilder.ToString();
         }
 
+        // if u looked at the open source hi :3
 
         public void Update()
         {
@@ -254,11 +256,11 @@ namespace BananaOS.Pages
                             Platform5Enable = true;
                             Platform5.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
                             Platform5.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
-                            Platform5.GetComponent<Renderer>().material.color = Color.black;
+                            Platform5.GetComponent<Renderer>().material.color = Color.HSVToRGB((Time.time * 0.5f) % 1f, 1f, 1f);
                         }
                         if (elapsedTime < transitionDuration)
                         {
-                            Platform5.GetComponent<Renderer>().material.color = Color.black;
+                            Platform5.GetComponent<Renderer>().material.color = Color.HSVToRGB((Time.time * 0.5f) % 1f, 1f, 1f);
                             elapsedTime += Time.deltaTime;
                             if (elapsedTime >= transitionDuration)
                             {
@@ -285,11 +287,11 @@ namespace BananaOS.Pages
                             Platform6Enable = true;
                             Platform6.GetComponent<Renderer>().material = new Material(Shader.Find("Sprites/Default"));
                             Platform6.transform.localScale = new Vector3(0.28f, 0.015f, 0.38f);
-                            Platform6.GetComponent<Renderer>().material.color = Color.black;
+                            Platform6.GetComponent<Renderer>().material.color = Color.HSVToRGB((Time.time * 0.5f) % 1f, 1f, 1f);
                         }
                         if (elapsedTime < transitionDuration)
                         {
-                            Platform6.GetComponent<Renderer>().material.color = Color.black;
+                            Platform6.GetComponent<Renderer>().material.color = Color.HSVToRGB((Time.time * 0.5f) % 1f, 1f, 1f);
                             elapsedTime += Time.deltaTime;
                             if (elapsedTime >= transitionDuration)
                             {
@@ -431,6 +433,14 @@ namespace BananaOS.Pages
                         if (selectionHandler.currentIndex == 5)
                         {
                             Platforms3 = false;
+                        }
+                        if (selectionHandler.currentIndex == 6)
+                        {
+                            Platforms2 = true;
+                        }
+                        if (selectionHandler.currentIndex == 7)
+                        {
+                            Platforms2 = false;
                         }
                     }
                     return;
